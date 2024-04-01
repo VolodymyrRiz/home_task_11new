@@ -2,7 +2,7 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 
 
-class NoteBase(BaseModel):
+class ContactBase(BaseModel):
     first_name: str = Field(max_length=50)
     last_name: str = Field(max_length=50)
     mail: str = Field(max_length=50)
@@ -10,9 +10,9 @@ class NoteBase(BaseModel):
     birthday: str = Field(max_length=50)
     description: str = Field(max_length=150)
 
-class NoteResponse(NoteBase):
+class ContactResponse(ContactBase):
     id: int
     created_at: datetime
     
     class Config:
-        orm_mode = True
+        from_attributes = True
