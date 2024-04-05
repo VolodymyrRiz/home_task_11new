@@ -3,11 +3,11 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from pydantic import BaseModel
+# from pydantic import BaseModel
 
 Base = declarative_base()
 
-class Contact(BaseModel):
+class Contact(Base):
     __tablename__ = "contacts"
     id = Column(Integer, primary_key=True)
     first_name = Column(String(50), nullable=False)
@@ -18,8 +18,8 @@ class Contact(BaseModel):
     description = Column(String(150), nullable=False)    
     created_at = Column('created_at', DateTime, default=func.now())
     
-class User(BaseModel):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
-    email = Column(String(50), nullable=False)
-    password = Column(String(50), nullable=False)
+# class User(Base):
+#     __tablename__ = "users"
+#     id = Column(Integer, primary_key=True)
+#     email = Column(String(50), nullable=False)
+#     password = Column(String(50), nullable=False)

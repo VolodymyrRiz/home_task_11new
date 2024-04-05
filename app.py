@@ -1,4 +1,3 @@
-import uvicorn
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
@@ -10,6 +9,7 @@ from db import User, get_db
 
 app = FastAPI()
 hash_handler = Hash()
+
 
 class UserModel(BaseModel):
     username: str
@@ -48,7 +48,3 @@ async def root():
 @app.get("/secret")
 async def read_item(current_user: User = Depends(get_current_user)):
     return {"message": 'secret router', "owner": current_user.email}
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
