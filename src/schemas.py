@@ -9,7 +9,12 @@ class ContactBase(BaseModel):
     phone: str = Field(max_length=50)
     birthday: str = Field(max_length=50)
     description: str = Field(max_length=150)
-
+    
+class UserBase(BaseModel):
+    email: str = Field(max_length=50)
+    password: str = Field(max_length=50)
+    
+    
 class ContactResponse(ContactBase):
     id: int
     created_at: datetime

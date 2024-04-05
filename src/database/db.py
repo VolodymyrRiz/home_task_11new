@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Boolean, func, Table
 from sqlalchemy.sql.sqltypes import DateTime
+from pydantic import BaseModel
 
 SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://postgres:567234@localhost:5432/rest_app"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
@@ -11,7 +12,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-class Contact(Base):
+class Contact(BaseModel):
     __tablename__ = "contacts"
     id = Column(Integer, primary_key=True)
     first_name = Column(String(50), nullable=False)
