@@ -8,8 +8,15 @@ from pydantic import BaseModel
 from auth import create_access_token, get_current_user, Hash
 from db import User, get_db
 
+
+from src.routes import contacts, tags, auth
+
 app = FastAPI()
 hash_handler = Hash()
+
+app.include_router(auth.router, prefix='/api')
+app.include_router(tags.router, prefix='/api')
+app.include_router(contacts.router, prefix='/api')
 
 class UserModel(BaseModel):
     username: str
@@ -48,6 +55,11 @@ async def root():
 @app.get("/secret")
 async def read_item(current_user: User = Depends(get_current_user)):
     return {"message": 'secret router', "owner": current_user.email}
+
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
 
 
 if __name__ == "__main__":

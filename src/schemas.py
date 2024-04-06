@@ -10,9 +10,9 @@ class ContactBase(BaseModel):
     birthday: str = Field(max_length=50)
     description: str = Field(max_length=150)
     
-# class UserBase(Base):
-#     email: str = Field(max_length=50)
-#     password: str = Field(max_length=50)
+class UserBase(BaseModel):
+    email: str = Field(max_length=50)
+    password: str = Field(max_length=50)
     
     
 class ContactResponse(ContactBase):
@@ -21,3 +21,7 @@ class ContactResponse(ContactBase):
     
     class Config:
         from_attributes = True
+        
+class RequestEmail(BaseModel):
+    email: EmailStr
+    

@@ -3,9 +3,9 @@ from typing import List
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 
-from home_task_11new.db import get_db
+from db import get_db
 from src.schemas import UserBase
-from home_task_11new.src.repository import users_0 as repository_users
+from src.repository import users as repository_users
 
 
 router = APIRouter(prefix='/users', tags=["users"])

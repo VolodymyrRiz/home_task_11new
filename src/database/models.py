@@ -18,8 +18,9 @@ class Contact(Base):
     description = Column(String(150), nullable=False)    
     created_at = Column('created_at', DateTime, default=func.now())
     
-# class User(Base):
-#     __tablename__ = "users"
-#     id = Column(Integer, primary_key=True)
-#     email = Column(String(50), nullable=False)
-#     password = Column(String(50), nullable=False)
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    email = Column(String(50), nullable=False)
+    password = Column(String(50), nullable=False)
+    confirmed = Column(Boolean, default=False)

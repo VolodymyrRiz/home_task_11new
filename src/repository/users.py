@@ -30,6 +30,12 @@ async def remove_contact(id: int, db: Session) -> User | None:
         db.commit()
     return user
 
+async def confirmed_email(email: str, db: Session) -> None:
+    user = await get_user_by_email(email, db)
+    user.confirmed = True
+    db.commit()
+
+
 
 # async def update_contact(contact_id: int, body: ContactBase, db: Session) -> Contact | None:
 #     contact = db.query(Contact).filter(Contact.id == contact_id).first()
