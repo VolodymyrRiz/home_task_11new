@@ -6,15 +6,15 @@ from src.database.models import Contact
 from src.schemas import ContactBase
 
 
-async def get_notes(skip: int, limit: int, db: Session) -> List[Contact]:
+async def get_contacts(skip: int, limit: int, db: Session) -> List[Contact]:
     return db.query(Contact).offset(skip).limit(limit).all()
 
 
-async def get_note(contact_id: int, db: Session) -> Contact:
+async def get_contact(contact_id: int, db: Session) -> Contact:
     return db.query(Contact).filter(Contact.id == contact_id).first()
 
 
-async def create_note(body: ContactBase, db: Session) -> Contact:
+async def create_contact(body: ContactBase, db: Session) -> Contact:
     contact = Contact(first_name=body.first_name, last_name=body.last_name, mail=body.mail, phone=body.phone, birthday=body.birthday, description=body.description)
     
     db.add(contact)
@@ -23,7 +23,7 @@ async def create_note(body: ContactBase, db: Session) -> Contact:
     return contact
 
 
-async def remove_note(contact_id: int, db: Session) -> Contact | None:
+async def remove_contact(contact_id: int, db: Session) -> Contact | None:
     contact = db.query(Contact).filter(Contact.id == contact_id).first()
     if contact:
         db.delete(contact)
@@ -31,7 +31,7 @@ async def remove_note(contact_id: int, db: Session) -> Contact | None:
     return contact
 
 
-async def update_note(contact_id: int, body: ContactBase, db: Session) -> Contact | None:
+async def update_contact(contact_id: int, body: ContactBase, db: Session) -> Contact | None:
     contact = db.query(Contact).filter(Contact.id == contact_id).first()
     if contact:
         contact.first_name = body.first_name

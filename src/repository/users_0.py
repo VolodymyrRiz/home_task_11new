@@ -6,15 +6,15 @@ from src.database.models import User
 from src.schemas import UserBase
 
 
-async def get_notes(skip: int, limit: int, db: Session) -> List[User]:
+async def get_contacts(skip: int, limit: int, db: Session) -> List[User]:
     return db.query(User).offset(skip).limit(limit).all()
 
 
-async def get_note(id: int, db: Session) -> User:
+async def get_contact(id: int, db: Session) -> User:
     return db.query(User).filter(User.id == id).first()
 
 
-async def create_note(body: UserBase, db: Session) -> User:
+async def create_contact(body: UserBase, db: Session) -> User:
     user = User(email=body.email, password=body.password)
     
     db.add(user)
@@ -23,7 +23,7 @@ async def create_note(body: UserBase, db: Session) -> User:
     return user
 
 
-async def remove_note(id: int, db: Session) -> User | None:
+async def remove_contact(id: int, db: Session) -> User | None:
     user = db.query(User).filter(User.id == id).first()
     if user:
         db.delete(user)
@@ -31,7 +31,7 @@ async def remove_note(id: int, db: Session) -> User | None:
     return user
 
 
-# async def update_note(contact_id: int, body: ContactBase, db: Session) -> Contact | None:
+# async def update_contact(contact_id: int, body: ContactBase, db: Session) -> Contact | None:
 #     contact = db.query(Contact).filter(Contact.id == contact_id).first()
 #     if contact:
 #         contact.first_name = body.first_name
