@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from db import get_db
 from src.schemas import UserBase
-from src.repository import users as repository_users
+from src.repository.users import repository_users
 
 
 router = APIRouter(prefix='/users', tags=["users"])

@@ -1,10 +1,21 @@
+from datetime import datetime, timedelta
+from typing import Optional
+
+from fastapi import Depends, HTTPException
+from passlib.context import CryptContext
+from fastapi.security import OAuth2PasswordBearer
+from sqlalchemy.orm import Session
+from jose import JWTError, jwt
+from starlette import status
 
 
 
+async def auth_service():
+    SECRET_KEY = "secret_key"
+    return SECRET_KEY
+    
 
-
-
-def create_email_token(self, data: dict):
+async def create_email_token(self, data: dict):
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(days=7)
     to_encode.update({"iat": datetime.utcnow(), "exp": expire})

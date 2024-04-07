@@ -1,7 +1,7 @@
 from typing import List
 
 from sqlalchemy.orm import Session
-
+from sqlalchemy.future import select
 from src.database.models import User
 from src.schemas import UserBase
 
@@ -30,12 +30,27 @@ async def remove_contact(id: int, db: Session) -> User | None:
         db.commit()
     return user
 
+
+async def get_user_by_email(email: str, db: Session) -> User:
+    # Assuming the User model has an 'email' field
+    result = await db.execute(select(User).where(User.email == email))
+    return result.scalars().first()
+
+
 async def confirmed_email(email: str, db: Session) -> None:
     user = await get_user_by_email(email, db)
     user.confirmed = True
     db.commit()
 
-
+async def repository_users():
+    return {
+        "get_contacts": get_contacts,
+        "get_contact": get_contact,
+        "create_contact": create_contact,
+        "remove_contact": remove_contact,
+        "get_user_by_email": get_user_by_email,
+        "confirmed_email": confirmed_email,
+    }
 
 # async def update_contact(contact_id: int, body: ContactBase, db: Session) -> Contact | None:
 #     contact = db.query(Contact).filter(Contact.id == contact_id).first()

@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from src.database.models import Contact, User
 from src.schemas import ContactBase
+from sqlalchemy import select
 
 
 async def get_contacts(limit: int, offset: int, db: Session, current_user: User):

@@ -7,6 +7,12 @@ from db import get_db
 from src.schemas import ContactBase, ContactResponse
 from src.repository import contacts as repository_contacts
 
+from fastapi import Query
+from src.services.auth import auth_service
+
+from src.routes.auth import get_current_user
+
+
 
 router = APIRouter(prefix='/contacts', tags=["contacts"])
 

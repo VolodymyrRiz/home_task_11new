@@ -9,13 +9,13 @@ from auth import create_access_token, get_current_user, Hash
 from db import User, get_db
 
 
-from src.routes import contacts, tags, auth
+from src.routes import contacts, users, auth
 
 app = FastAPI()
 hash_handler = Hash()
 
 app.include_router(auth.router, prefix='/api')
-app.include_router(tags.router, prefix='/api')
+app.include_router(users.router, prefix='/api')
 app.include_router(contacts.router, prefix='/api')
 
 class UserModel(BaseModel):

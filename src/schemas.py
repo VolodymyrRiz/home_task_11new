@@ -1,5 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
+from pydantic import EmailStr
 
 
 class ContactBase(BaseModel):
@@ -24,4 +25,8 @@ class ContactResponse(ContactBase):
         
 class RequestEmail(BaseModel):
     email: EmailStr
+    
+class UserModel(BaseModel):
+    email: str
+    password: str
     
