@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status, Security, BackgroundTasks, Request
-from src.schemas import UserModel, RequestEmail
+from src.schemas import UserModel, UserResponse, TokenModel, RequestEmail
 from src.services.auth import auth_service
 from db import get_db
 from sqlalchemy.orm import Session
@@ -10,14 +10,14 @@ from fastapi.security import OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
 from typing import Optional
 
-from fastapi import Depends, HTTPException
+from src.database.models import User
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
+
 from jose import JWTError, jwt
 from starlette import status
 
-from db import get_db, User
+
 
 router = APIRouter(prefix='/auth', tags=["auth"])
 

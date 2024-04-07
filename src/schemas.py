@@ -15,6 +15,14 @@ class UserBase(BaseModel):
     email: str = Field(max_length=50)
     password: str = Field(max_length=50)
     
+class UserResponse(UserBase):
+    id: int
+    confirmed: bool
+    created_at: datetime
+    
+    class Config:
+        from_attributes = True
+    
     
 class ContactResponse(ContactBase):
     id: int
@@ -29,4 +37,8 @@ class RequestEmail(BaseModel):
 class UserModel(BaseModel):
     email: str
     password: str
+    
+class TokenModel(BaseModel):
+    access_token: str
+    token_type: str
     
