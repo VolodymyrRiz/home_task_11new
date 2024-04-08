@@ -9,7 +9,7 @@ from sqlalchemy import select
 
 async def get_contacts(limit: int, offset: int, db: Session, current_user: User):
     stmt = select(Contact).filter_by(user=current_user).offset(offset).limit(limit)
-    contact = await db.execute(stmt)
+    contact = db.execute(stmt)
     return contact.scalars().all()
 
 

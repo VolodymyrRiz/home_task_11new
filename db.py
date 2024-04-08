@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, Integer
+from sqlalchemy import create_engine, Column, String, Integer, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -17,6 +17,8 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String(150), nullable=False, unique=True)
     password = Column(String(255), nullable=False)
+    confirmed = Column(Boolean, default=False)
+
 
 
 Base.metadata.create_all(bind=engine)

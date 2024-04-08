@@ -33,12 +33,12 @@ async def remove_contact(id: int, db: Session) -> User | None:
 
 async def get_user_by_email(email: str, db: Session) -> User:
     # Assuming the User model has an 'email' field
-    result = await db.execute(select(User).where(User.email == email))
+    result = db.execute(select(User).where(User.email == email))
     return result.scalars().first()
 
 
 async def confirmed_email(email: str, db: Session) -> None:
-    user = await get_user_by_email(email, db)
+    user = get_user_by_email(email, db)
     user.confirmed = True
     db.commit()
 

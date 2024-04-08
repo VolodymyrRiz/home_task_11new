@@ -9,7 +9,7 @@ from src.services.auth import auth_service
 conf = ConnectionConfig(
     MAIL_USERNAME="rizun2024@meta.ua",
     MAIL_PASSWORD="Rizun_2024",
-    MAIL_FROM=EmailStr("rizun2024@meta.ua"),
+    MAIL_FROM="rizun2024@meta.ua",
     MAIL_PORT=465,
     MAIL_SERVER="smtp.meta.ua",
     MAIL_FROM_NAME="Volodymyr Rizun",
@@ -32,7 +32,7 @@ async def send_email(email: EmailStr, username: str, host: str):
         )
 
         fm = FastMail(conf)
-        await fm.send_message(message, template_name="email_template.html")
+        fm.send_message(message, template_name="email_template.html")
     except ConnectionErrors as err:
         print(err)
 
