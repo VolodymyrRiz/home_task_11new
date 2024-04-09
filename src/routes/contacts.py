@@ -51,7 +51,7 @@ async def update_contact(body: ContactBase, contact_id: int, db: Session = Depen
 
 @router.patch("/{contact_id}", response_model=ContactResponse)
 async def update_status_contact(body: ContactBase, contact_id: int, db: Session = Depends(get_db)):
-    contact = repository_contacts.update_status_contact(contact_id, body, db)
+    contact = update_status_contact(contact_id, body, db)
     if contact is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Contact not found")
     return contact

@@ -19,7 +19,7 @@ from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
 
 from datetime import datetime, timedelta
-from typing import Optional
+
 
 from src.database.models import User
 from passlib.context import CryptContext
@@ -61,7 +61,6 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
     return user
 
 
-
 async def create_email_token(self, data: dict):
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(days=7)
@@ -78,4 +77,9 @@ async def get_email_from_token(self, token: str):
       print(e)
       raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                           detail="Invalid token for email verification")
+      
+async def get_password_hash(email: str, db: Session):
+     user = db.query(User).filter(User.email == email).first()
+     return user.password
+    
 
