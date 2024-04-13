@@ -7,14 +7,45 @@ from src.schemas import UserBase
 
 
 async def get_contacts(skip: int, limit: int, db: Session) -> List[User]:
+    """
+    Retrieves a list of contacts for a specific user with specified pagination parameters.
+    :param skip: The number of contacts to skip before starting to return contacts.
+    :type skip: int
+    :param limit: The maximum number of contacts to return.
+    :type limit: int    
+    :param db: The database session.
+    :type db: Session    
+    :return: The User with the specified offset, or None if it does not exist.
+    :rtype: List[User]
+    """
     return db.query(User).offset(skip).limit(limit).all()
 
 
 async def get_contact(id: int, db: Session) -> User:
+    """
+    Retrieves a single contact with the specified ID for a specific user.
+
+    :param id: The ID of the contact to retrieve.
+    :type id: int   
+    :param db: The database session.
+    :type db: Session
+    :return: The User with the specified ID, or None if it does not exist.
+    :rtype: User | None
+    """
     return db.query(User).filter(User.id == id).first()
 
 
 async def create_contact(body: UserBase, db: Session) -> User:
+    """
+    Creates a new contact for a specific user.
+
+    :param body: The data for the contact to create.
+    :type body: UserBase    
+    :param db: The database session.
+    :type db: Session
+    :return: The newly created user.
+    :rtype: User
+    """
     user = User(email=body.email, password=body.password)
     
     db.add(user)
@@ -24,6 +55,16 @@ async def create_contact(body: UserBase, db: Session) -> User:
 
 
 async def remove_contact(id: int, db: Session) -> User | None:
+    """
+    Removes a single contact with the specified ID for a specific user.
+
+    :param id: The ID of the contact to remove.
+    :type id: int    
+    :param db: The database session.
+    :type db: Session
+    :return: The removed user, or None if it does not exist.
+    :rtype: User | None
+    """
     user = db.query(User).filter(User.id == id).first()
     if user:
         db.delete(user)
