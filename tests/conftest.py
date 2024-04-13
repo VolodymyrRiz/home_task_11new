@@ -6,7 +6,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# from main import app
+from main import app
 from src.database.models import Base
 from src.database.db import get_db
 
@@ -50,4 +50,4 @@ def client(session):
 
 @pytest.fixture(scope="module")
 def user():
-    return {"username": "deadpool", "email": "deadpool@example.com", "password": "123456789"}
+    return {"username": " Rizun+Volodymyr", "email": "rizun2024@meta.ua", "password": "Rizun_2024"}
